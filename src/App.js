@@ -10,6 +10,7 @@ import Banner from './components/Portfolio/Banner/Banner.jsx';
 import ProgressBar from './components/Portfolio/ProgressBar/ProgressBar.jsx';
 import { useState, useEffect } from 'react';
 import { renderToString } from 'react-dom/server';
+import CartContext from './context/CartContext.js';
 
 
 function App() {
@@ -53,56 +54,11 @@ function App() {
 
   
   return (
-    <div className="App">
-      {
-      /* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hello World
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */
-      
-      /* <NavBar />
-      <TypeWriter text={["SOFTWARE DEVELOPER","MERN STACK DEVELOPER"]} typingSpeed={100} deletingSpeed={50} />
-      <Tile 
-        header={"class going on"} 
-        subHeader={"Everyone is making something"}
-        img = {"https://cdn.dribbble.com/users/3484830/screenshots/16787618/media/b134e73ef667b926c76d8ce3f962dba2.gif"}
-        text = {"Approved training partner under the scheme for ancinkn isndc  dionc vviosdn onivdikm osnvidk sdvonin sond n onsidv sdonx"}
-        link = {"https://www.scaler.com"}
-        position = {"img-right"}
-        bgColor = {"green"}
-        />
-        <Banner />
-        <ProgressBar percentage={percentage}/> */
-          //  <NavBar />
-          // <TypeWriter text={["SOFTWARE DEVELOPER","MERN STACK DEVELOPER"]} typingSpeed={100} deletingSpeed={50} />
-          // <Tile
-          //   header={"class going on"}
-          //   subHeader={"Everyone is making something"}
-          //   img = {"https://cdn.dribbble.com/users/3484830/screenshots/16787618/media/b134e73ef667b926c76d8ce3f962dba2.gif"}
-          //   text = {"Approved training partner under the scheme for ancinkn isndc  dionc vviosdn onivdikm osnvidk sdvonin sond n onsidv sdonx"}
-          //   link = {"https://www.scaler.com"}
-          //   position = {"img-right"}
-          //   bgColor = {"green"}
-          //   />
-          //   <Banner />
-          //   <ProgressBar percentage={percentage}/> 
-          // <Effect />
-      }
-
-      <Products increaseQuantity = {increaseQuantity} cart={cart} decreaseQuantity={decreaseQuantity} />
-      
-  
-    </div>
+    <CartContext.Provider value={{cart,increaseQuantity,decreaseQuantity}}>
+        <div className="App">
+          <Products />
+        </div>
+    </CartContext.Provider>
   );
 }
 

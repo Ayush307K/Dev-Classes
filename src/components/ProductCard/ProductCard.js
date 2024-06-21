@@ -2,7 +2,7 @@ import {useRef} from 'react';
 import { useState } from 'react';
 import AddToCart from '../AddToCart/AddToCart';
 
-function ProductCard({title, brand, price, cart, increaseQuantity, decreaseQuantity}){
+function ProductCard({product}){
     let pRef = useRef(0);
     let iRef = useRef(0);
     let oRef = useRef(0);
@@ -24,12 +24,12 @@ function ProductCard({title, brand, price, cart, increaseQuantity, decreaseQuant
         //   oRef.current.innerText = `Over here - ${text1}`;
         // }
     };
-
+    console.log("product " + product.id);
     return(
         <div>
-            <p onClick={printTitle}> {title}</p>
-            <p ref={pRef}> {brand}</p>
-            <p > {price.value}</p>
+            <p onClick={printTitle}> {product.title}</p>
+            <p ref={pRef}> {product.brand}</p>
+            <p > {product.price.value}</p>
             
 
             {/* <p onClick={printTitle}>Products</p>
@@ -37,7 +37,7 @@ function ProductCard({title, brand, price, cart, increaseQuantity, decreaseQuant
             {/* <input type='text' ref={iRef} value={inputValue} onChange={changeText}></input>
             <p ref={oRef}>Over here - {inputValue}</p> */}
 
-            <AddToCart product={{title,brand,price}} cart={cart} increaseQuantity = {increaseQuantity} decreaseQuantity={decreaseQuantity}/>
+            <AddToCart product={product} />
             <hr></hr>
         </div>
     )

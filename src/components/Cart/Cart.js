@@ -2,10 +2,10 @@ function Cart({product, cart}){
     return(
         <div>
             I am Cart
-            <p > {product.title}</p>
-            <p > {product.brand}</p>
-            <p > {product.price.value}</p>
-            <p> {product.quantity}</p>
+            <p>Title -  {product.title}</p>
+            <p>Brand - {product.brand}</p>
+            <p>Price - {product.price.value}</p>
+            <p>Quantity - {product.quantity}</p>
             <hr></hr>
         </div>
     )
