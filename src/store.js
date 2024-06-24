@@ -1,9 +1,13 @@
+
 import { createStore } from "redux";
+import { omit } from "lodash";
 function cartReducer(state={items:{}},action){
     switch(action.type){
         case "ADD_TO_CART":{
             const product = action.payload;
+            
             if(state.items[product.id]){
+                console.log(state.items[product.id]);
                 return{
                     ...state,
                     items:{
@@ -15,12 +19,13 @@ function cartReducer(state={items:{}},action){
                     }
                 }
             }else{
+                // console.log(product);
                 return{
                     ...state,
                     items:{
                         ...state.items,
                         [product.id]:{
-                            ...state.items[product.id],
+                            ...product,
                             quantity: 1
                         }
                     }
@@ -28,25 +33,23 @@ function cartReducer(state={items:{}},action){
             }
         }
         case "REMOVE_FROM_CART":{
-            if(state.items[product.id]){
-                if(state.items[product.id].quantity>1){
-                    return{
-                        ...state,
-                        items:{
-                            ...state.items,
-                            [product.id]:{
-                                ...state.items[product.id],
-                                quantity: state.items[product.id].quantity - 1
-                            }
+            const product = action.payload;
+            if(state.items[product.id].quantity>1){
+                return{
+                    ...state,
+                    items:{
+                        ...state.items,
+                        [product.id]:{
+                            ...state.items[product.id],
+                            quantity: state.items[product.id].quantity - 1
                         }
-                    }
-                }else{
-                    return{
-                        
                     }
                 }
             }else{
-                return state;
+                return {
+                    ...state,
+                    items: omit(state.items, [product.id])
+                }
             }
         }
         default: 

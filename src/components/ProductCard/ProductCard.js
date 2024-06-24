@@ -1,6 +1,7 @@
 import {useRef} from 'react';
 import { useState } from 'react';
 import AddToCart from '../AddToCart/AddToCart';
+import ReduxAddToCart from '../ReduxAddToCart';
 
 function ProductCard({product}){
     let pRef = useRef(0);
@@ -37,7 +38,7 @@ function ProductCard({product}){
             {/* <input type='text' ref={iRef} value={inputValue} onChange={changeText}></input>
             <p ref={oRef}>Over here - {inputValue}</p> */}
 
-            <AddToCart product={product} />
+            <ReduxAddToCart product={product} />
             <hr></hr>
         </div>
     )
