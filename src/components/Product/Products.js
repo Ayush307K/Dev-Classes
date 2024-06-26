@@ -4,6 +4,7 @@ import useWindow from "../../hooks/UseWindow/useWindow";
 import Cart from "../Cart/Cart";
 import { useContext } from "react";
 import CartContext from "../../context/CartContext";
+import { useSelector } from "react-redux";
 
 function Products(){
 
@@ -19,14 +20,18 @@ function Products(){
             setProducts(res);
         })
     },[])
-
+    // let items = useSelector((state)=>{
+    //     return state.items;
+    // }) 
+    // console.log(items);
     return (
         <div>
-            {
-                Object.values(cart).map(function (item){
-                    return (<Cart product={item} cart={cart}/>);
+            {/* {
+                Object.values(items).map(function (item){
+                    return (<Cart product={item} />);
                 })
-            }
+            } */}
+            <Cart />
             <hr></hr>
             <hr></hr>
             {

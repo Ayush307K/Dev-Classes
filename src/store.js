@@ -7,7 +7,7 @@ function cartReducer(state={items:{}},action){
             const product = action.payload;
             
             if(state.items[product.id]){
-                console.log(state.items[product.id]);
+                // console.log(state.items[product.id]);
                 return{
                     ...state,
                     items:{
