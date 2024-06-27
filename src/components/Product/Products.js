@@ -1,44 +1,52 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import useWindow from "../../hooks/UseWindow/useWindow";
 import Cart from "../Cart/Cart";
-import { useContext } from "react";
 import CartContext from "../../context/CartContext";
 import { useSelector } from "react-redux";
+import Categories from "../Categories";
 
-function Products(){
-
-    const {cart} = useContext(CartContext);
-
+function Products() {
+    const { cart } = useContext(CartContext);
     const [products, setProducts] = useState([]);
-    useEffect(()=>{
-        fetch("https://602fc537a1e9d20017af105e.mockapi.io/api/v1/products").then(
-            (response) => {
-                return response.json();
-            }
-        ).then((res)=>{
-            setProducts(res);
-        })
-    },[])
-    // let items = useSelector((state)=>{
-    //     return state.items;
-    // }) 
-    // console.log(items);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('');
+
+    useEffect(() => {
+        fetch("https://602fc537a1e9d20017af105e.mockapi.io/api/v1/products")
+            .then((response) => response.json())
+            .then((res) => {
+                setProducts(res);
+                setFilteredProducts(res);
+            });
+    }, []);
+
+    function handleCategory(category) {
+        setSelectedCategory(category);
+        if (category === "ALL") {
+            setFilteredProducts(products);
+        } else {
+            const filtered = products.filter(product => product.category === category);
+            setFilteredProducts(filtered);
+        }
+    }
+    
+
     return (
         <div>
-            {/* {
-                Object.values(items).map(function (item){
-                    return (<Cart product={item} />);
-                })
-            } */}
-            <Cart />
-            <hr></hr>
-            <hr></hr>
-            {
-                products.map(function (item,index){
-                    return (<ProductCard key={index} product={item}/>)
-                })
-            }
+            <div /* style={{display: "flex", justifyContent:"space-between"}} */>
+                <Categories onSelectCategory={handleCategory} />
+            </div>
+            
+            <hr />
+            <hr />
+            <div className="productcard-container">
+                {
+                    filteredProducts.map((item, index) => (
+                        <ProductCard key={index} product={item} />
+                    ))
+                }
+            </div>
         </div>
     )
 }

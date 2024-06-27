@@ -17,7 +17,7 @@ function ReduxAddToCart({product}){
     if(quantity === 0){
         return(
             <div>
-                <button onClick={increase}>AddToCart</button>
+                <button className="add-to-cart" onClick={increase}>AddToCart</button>
             </div>
         )
     }
