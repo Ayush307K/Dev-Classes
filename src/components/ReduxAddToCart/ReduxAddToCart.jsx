@@ -11,7 +11,7 @@ function ReduxAddToCart({product}){
     }
     
     let quantity = useSelector((state)=>{
-        return state.items[product.id]?.quantity || 0;
+        return state.cart.items[product.id]?.quantity || 0;
     })
 
     if(quantity === 0){
@@ -24,9 +24,9 @@ function ReduxAddToCart({product}){
     else{
         return(
             <div>
-                <button onClick={decrease}>-</button>
+                <button id="btn" onClick={decrease}>-</button>
                 <span style={{ color: 'black', padding: 0 }}>Quantity - {quantity}</span>
-                <button onClick={increase}>+</button>
+                <button id="btn" onClick={increase}>+</button>
             </div>
             
         )

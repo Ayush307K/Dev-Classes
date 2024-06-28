@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 function Cart() {
     // useEffect()
-    let items = useSelector((state) => state.items);
+    let items = useSelector((state) => state.cart.items);
     // console.log(items.length);
     let length = items?Object.values(items).length:0;
     return (
